@@ -1,0 +1,9 @@
+contact = {
+    "ayush" : 7807360080,
+    "sujal" : 9817590400,
+    "vansh" : 6258014567,
+    "yash" : 9876543210
+}
+print(contact.get("sujal"))
+contact["parth"] = 6245786255
+print(contact)
