@@ -1,1 +1,1 @@
-# student-rersult-managment-system
+# python mini projects
