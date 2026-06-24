@@ -1,0 +1,109 @@
+class Vehicle:
+    total_rented = 0
+    total_collection = 0
+
+    def __init__(self, vehicle_no):
+        self.vehicle_no = vehicle_no
+
+    def calculate_rent(self, km):
+        pass
+
+    @classmethod
+    def update_daily_data(cls, amount):
+        cls.total_rented += 1
+        cls.total_collection += amount
+
+    @classmethod
+    def show_daily_report(cls):
+        print("\n===== DAILY REPORT =====")
+        print("Total Vehicles Rented :", cls.total_rented)
+        print("Total Collection      : ₹", cls.total_collection)
+
+
+class Bike(Vehicle):
+    BASE_KM = 250
+    BASE_RENT = 2000
+    EXTRA_CHARGE = 5
+
+    def calculate_rent(self, km):
+        if km <= self.BASE_KM:
+            rent = self.BASE_RENT
+        else:
+            rent = self.BASE_RENT + (km - self.BASE_KM) * self.EXTRA_CHARGE
+
+        Vehicle.update_daily_data(rent)
+        return rent
+
+
+class Car(Vehicle):
+    BASE_KM = 250
+    BASE_RENT = 5000
+    EXTRA_CHARGE = 12
+
+    def calculate_rent(self, km):
+        if km <= self.BASE_KM:
+            rent = self.BASE_RENT
+        else:
+            rent = self.BASE_RENT + (km - self.BASE_KM) * self.EXTRA_CHARGE
+
+        Vehicle.update_daily_data(rent)
+        return rent
+
+
+class Bus(Vehicle):
+    BASE_KM = 250
+    BASE_RENT = 7500
+    EXTRA_CHARGE = 20
+
+    def calculate_rent(self, km):
+        if km <= self.BASE_KM:
+            rent = self.BASE_RENT
+        else:
+            rent = self.BASE_RENT + (km - self.BASE_KM) * self.EXTRA_CHARGE
+
+        Vehicle.update_daily_data(rent)
+        return rent
+
+
+while True:
+   print("===== Vehicle Rental System =====")
+   print("1. Rent Bike")
+   print("2. Rent Car")
+   print("3. Rent Bus")
+   print("4. Show Daily Report")
+   print("5. Exit")
+
+   choice = int(input("Enter choice: "))
+
+   if choice == 1:
+       vno = input("Enter Bike Number: ")
+       km = int(input("Enter KM travelled: "))
+       bike = Bike(vno)
+       rent = bike.calculate_rent(km)
+       print("Bike Rent =", rent)
+
+   elif choice == 2:
+       vno = input("Enter Car Number: ")
+       km = int(input("Enter KM travelled: "))
+       car = Car(vno)
+       rent = car.calculate_rent(km)
+       print("Car Rent =", rent)
+
+   elif choice == 3:
+       vno = input("Enter Bus Number: ")
+       km = int(input("Enter KM travelled: "))
+       bus = Bus(vno)
+       rent = bus.calculate_rent(km)
+       print("Bus Rent =", rent)
+
+   elif choice == 4:
+       print("===== Daily Report =====")
+       print("Total Vehicles Rented :", Vehicle.total_rented)
+       print("Total Collection (Rs):", Vehicle.total_collection)
+
+   elif choice == 5:
+       print("Thank You!")
+       break
+
+   else:
+       print("Invalid Choice!")
