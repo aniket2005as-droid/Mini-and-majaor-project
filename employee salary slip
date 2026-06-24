@@ -1,0 +1,48 @@
+class Employee:
+    def __init__(self, name, role, working_days, extra_hours):
+        self.name = name
+        self.role = role.lower()
+        self.working_days = working_days
+        self.extra_hours = extra_hours
+
+        if self.role == "manager":
+            self.base_salary = 80000
+            self.overtime_rate = 1000
+
+        elif self.role == "developer":
+            self.base_salary = 40000
+            self.overtime_rate = 800
+
+        elif self.role == "intern":
+            self.base_salary = 15000
+            self.overtime_rate = 150
+
+        else:
+            raise ValueError("Invalid Role")
+
+    def calculate_salary(self):
+        extra_pay = self.extra_hours * self.overtime_rate
+        total_salary = self.base_salary + extra_pay
+        return total_salary, extra_pay
+
+    def print_salary_slip(self):
+        total_salary, extra_pay = self.calculate_salary()
+
+
+        print("            SALARY SLIP     ")
+        print(f"Employee Name : {self.name}")
+        print(f"Designation   : {self.role.title()}")
+        print(f"Working Days  : {self.working_days}")
+        print(f"Extra Hours   : {self.extra_hours}")
+        print(f"Base Salary   : Rs.{self.base_salary}")
+        print(f"Overtime Pay  : Rs.{extra_pay}")
+        print(f"Total Salary  : Rs.{total_salary}")
+
+
+name = input("Enter Employee Name: ")
+role = input("Enter Role (Manager/Developer/Intern): ")
+days = int(input("Enter Total Working Days: "))
+extra_hours = int(input("Enter Extra Hours Worked: "))
+
+emp = Employee(name, role, days, extra_hours)
+emp.print_salary_slip()
