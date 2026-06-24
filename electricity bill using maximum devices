@@ -1,0 +1,63 @@
+class Device:
+    def __init__(self, name, power_watts, hours_used):
+        self.name = name
+        self.power_watts = power_watts
+        self.hours_used = hours_used
+
+    def energy_consumption(self):
+        return (self.power_watts * self.hours_used) / 1000
+
+
+class ElectricityBill:
+    def __init__(self):
+        self.devices = []
+
+    def add_device(self, device):
+        self.devices.append(device)
+
+    def total_energy(self):
+        total = 0
+        for device in self.devices:
+            total += device.energy_consumption()
+        return total
+
+    def average_consumption(self):
+        if len(self.devices) == 0:
+            return 0
+        return self.total_energy() / len(self.devices)
+
+    def calculate_bill(self):
+        units = self.total_energy()
+
+        if units <= 30:          # approx. bill <= 300
+            rate = 10
+        elif units <= 40:        # approx. bill <= 600
+            rate = 15
+        else:
+            rate = 20
+
+        amount = units * rate
+        return amount, rate
+
+
+bill = ElectricityBill()
+
+print("Enter details for 8 devices:\n")
+
+for i in range(8):
+    name = input(f"Device {i+1} Name: ")
+    power = float(input("Power (Watts): "))
+    hours = float(input("Hours Used: "))
+
+    device = Device(name, power, hours)
+    bill.add_device(device)
+
+total_units = bill.total_energy()
+average_units = bill.average_consumption()
+amount, rate = bill.calculate_bill()
+
+print("\n----- Electricity Bill Report -----")
+print(f"Total Energy Consumption: {total_units:.2f} units (kWh)")
+print(f"Average Consumption per Device: {average_units:.2f} units")
+print(f"Rate Applied: ₹{rate} per unit")
+print(f"Total Bill Amount: ₹{amount:.2f}")
