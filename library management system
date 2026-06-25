@@ -1,0 +1,39 @@
+
+class Book:
+  def __init__(self, name, author):
+    self.name = name
+    self.__author = author
+
+  def display(self):
+    print(f"name: {self.name}")
+    print(f"Author: {self.__author}")
+
+class book_type:
+  def __init__(self):
+    self.subject = ""
+
+  def sub(self,subject):
+    self.subject = subject
+    return self.subject
+
+  def display(self):
+    print(f"Subject: {self.subject}")
+
+class Library(Book):
+  def __init__(self, name, author, id, subject):
+    super().__init__(name, author)
+    self.id = id
+    self.book_type_info = book_type()
+    self.book_type_info.sub(subject)
+
+  def display(self):
+    print(f"name: {self.name}")
+    print(f"Author: {self._Book__author}")
+    print(f"id: {self.id}")
+    self.book_type_info.display()
+
+book1 = Book("triveni", "Gulzar shahab")
+book1.display()
+
+library_book1 = Library("the love story of two bofellows", "munshi premchand", "1-56619-909-3", "Romance")
+library_book1.display()
